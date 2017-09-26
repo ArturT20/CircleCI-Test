@@ -29,7 +29,7 @@ dependencies:
 
 test:
   override:
-    - cd sc-*-linux && ./bin/sc --user $arturt --api-key $9d552718-86bf-4489-ba83-7365d32fa57b --readyfile ~/sauce_is_ready:
+    - cd sc-*-linux && ./bin/sc --user arturt --api-key 9d552718-86bf-4489-ba83-7365d32fa57b --readyfile ~/sauce_is_ready:
         background: true
     # Wait for tunnel to be ready
     - while [ ! -e ~/sauce_is_ready ]; do sleep 1; done
@@ -42,10 +42,10 @@ test:
   post:
     - killall --wait sc  # wait for Sauce Connect to close the tunnel
 
-    #Command to upload Fair IOS app to SauceLabs storage
+    #Command to upload Fair app to SauceLabs storage
     curl -u arturt:9d552718-86bf-4489-ba83-7365d32fa57b -X POST -H "Content-Type: application/octet-stream" https://saucelabs.com/rest/v1/storage/arturt/fairapp.zip?overwrite=true --data-binary @"/Users/arturtorosyan/Library/Developer/xcode/DerivedData/fair-chzyjfjtqmkulbbpofoqqezkqusa/Build/Products/Debug-iphonesimulator/fairapp.zip"
 
-    #Command to run test script on SauceLabs
+    #Command to run test script on SauceLabs from terminal 
     bundle exec cucumber TEST_ENV=saucelabs
 
 
